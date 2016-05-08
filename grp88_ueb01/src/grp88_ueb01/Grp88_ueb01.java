@@ -118,7 +118,7 @@ public class Grp88_ueb01 {
         }
         return noofChars;
     }
-
+// Entfernen da start und ende nicht vertauscht werden dürfen
     public static int getMaxWidth(int start, int end) {
         if (getNoofChars(start) > getNoofChars(end)) {
             return getNoofChars(start);
