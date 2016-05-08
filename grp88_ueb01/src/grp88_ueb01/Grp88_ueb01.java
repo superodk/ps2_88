@@ -18,6 +18,10 @@ public class Grp88_ueb01 {
      * @return boolean value
      */
     public static boolean isPrim(int examNumber) {
+        // exculude Zero
+        if (examNumber == 0){
+            return false;
+        }
         // try all values until squareroot of examNumber 
         for (int counter = 2; counter < Math.sqrt(examNumber) + 1; counter++) {
             if (examNumber % counter == 0) {
@@ -79,22 +83,22 @@ public class Grp88_ueb01 {
     public static int getCsum(int examNumber) {
         int sum = 0;
         while (0 != examNumber) {
-            // addiere die letzte ziffer der uebergebenen examNumber zur summe
+            // add last digit to sum
             sum = sum + (examNumber % 10);
-            // entferne die letzte ziffer der uebergebenen examNumber
+            // remove last digit
             examNumber = examNumber / 10;
         }
         return sum;
     }
 
     /**
-     * verify examNumber is dividable by Cross Sum without remainder
+     * verify examNumber is a multiple of Cross Sum without remainder
      *
      * @param examNumber current number in range
      * @param sum Cross Sum of examNumber
      * @return
      */
-    public static boolean isDivi(int examNumber, int sum) {
+    public static boolean isMult(int examNumber, int sum) {
         if (examNumber == 0) {
             return false;
         }
@@ -128,8 +132,8 @@ public class Grp88_ueb01 {
      */
     public static void main(String[] args) {
         // Define a number range 
-        final int minNumber = 11;    // set min range number
-        final int maxNumber = 3100;    // set max range number
+        final int minNumber = 0;      // set min range number
+        final int maxNumber = 23;    // set max range number
         final int colWidth = getMaxWidth(minNumber, maxNumber);
 
         // Runs all Numbers through defined range and checks for their properties
@@ -147,7 +151,11 @@ public class Grp88_ueb01 {
                 System.out.printf("%" + colWidth + "d: belongs to Repdigit.\n", counter);
             }
             // Crosssum check
-            if (isDivi(counter, getCsum(counter)) == true) {
+            if (isMult(counter, getCsum(counter)) == true) {
+                System.out.printf("%" + colWidth + "d: is a whole number multiple of the cross sum [%d]\n", counter, getCsum(counter));
+            }
+            // Crosssum Check v2
+            if (counter != 0 && counter % getCsum(counter) == 0) {
                 System.out.printf("%" + colWidth + "d: is a whole number multiple of the cross sum [%d]\n", counter, getCsum(counter));
             }
 
