@@ -14,17 +14,17 @@ public class Grp88_ueb01 {
     /**
      * verify belonging to prime numbers
      *
-     * @param examNumber current number in range
-     * @return boolean value
+     * @param curNum as current examNumber in range
+     * @return curNum belongs to Prime Numbers
      */
-    public static boolean isPrim(int examNumber) {
+    public static boolean isPrim(int curNum) {
         // exculude Zero
-        if (examNumber == 0){
+        if (curNum == 0) {
             return false;
         }
-        // try all values until squareroot of examNumber 
-        for (int counter = 2; counter < Math.sqrt(examNumber) + 1; counter++) {
-            if (examNumber % counter == 0) {
+        // try all values until squareroot of curNum 
+        for (int counter = 2; counter < Math.sqrt(curNum) + 1; counter++) {
+            if (curNum % counter == 0) {
                 return false;
             }
         }
@@ -34,42 +34,42 @@ public class Grp88_ueb01 {
     /**
      * verify belonging to Fibonacci numbers
      *
-     * @param examNumber current number in range
-     * @return current number belongs to Fibonacci
+     * @param curNum as current examNumber in range
+     * @return curNum belongs to Fibonacci Numbers
      */
-    public static boolean isFibo(int examNumber) {
+    public static boolean isFibo(int curNum) {
         int a = 0, b = 1, c = 0;
-        // Calculate all Fibonacci Numbers until examNumber 
-        while (c < examNumber) {
+        // Calculate all Fibonacci Numbers until curNum 
+        while (c < curNum) {
             c = a + b;
             a = b;
             b = c;
         }
-        // Compare if last Fibonacci number equals examNumber 
-        return c == examNumber;
+        // Compare if last Fibonacci number equals curNum 
+        return c == curNum;
     }
 
     /**
      * verify belonging to Repdigit numbers
      *
-     * @param examNumber current number in range
-     * @return the current number belongs to Repdigit
+     * @param curNum current examNumber in range
+     * @return curNum belongs to Repdigit Numbers
      */
-    public static boolean isRepd(int examNumber) {
+    public static boolean isRepd(int curNum) {
         // at least 2-digits are required
-        if ((examNumber >= -9) && (examNumber <= 9)) {
+        if ((curNum >= -9) && (curNum <= 9)) {
             return false;
         }
         boolean repdigit = true;
-        int compareValue = examNumber % 10;
-        // compare if the number in every place value equals
-        while (examNumber != 0) {
-            if (compareValue != examNumber % 10) {
+        int compareValue = curNum % 10;
+        // compare if digit in every place curNum equals itself
+        while (curNum != 0) {
+            if (compareValue != curNum % 10) {
                 repdigit = false;
                 break;
             }
-            // remove last place value of the examNumber
-            examNumber = examNumber / 10;
+            // remove last digit of curNum
+            curNum /= 10;
         }
         return repdigit;
     }
@@ -77,54 +77,51 @@ public class Grp88_ueb01 {
     /**
      * calculate the Cross Sum
      *
-     * @param examNumber current number in range
-     * @return calculated Cross Sum
+     * @param curNum current examNumber in range
+     * @return calculated Cross Sum of curNum
      */
-    public static int getCsum(int examNumber) {
-        int sum = 0;
-        while (0 != examNumber) {
-            // add last digit to sum
-            sum = sum + (examNumber % 10);
+    public static int getCsum(int curNum) {
+        int cSum = 0;
+        while (0 != curNum) {
+            // add last digit to cSum
+            cSum += (curNum % 10);
             // remove last digit
-            examNumber = examNumber / 10;
+            curNum /= 10;
         }
-        return sum;
+        return cSum;
     }
 
     /**
-     * verify examNumber is a multiple of Cross Sum without remainder
+     * verify curNum is a multiple of Cross Sum without remainder
      *
-     * @param examNumber current number in range
-     * @param sum Cross Sum of examNumber
+     * @param curNum current examNumber in range
+     * @param cSum Cross Sum of examNumber
      * @return
      */
-    public static boolean isMult(int examNumber, int sum) {
-        if (examNumber == 0) {
+    public static boolean isMult(int curNum, int cSum) {
+        if (curNum == 0) {
             return false;
         }
-        return (examNumber % sum == 0);
+        return (curNum % cSum == 0);
     }
-// benötigte Spaltenbreite errechnen
-    public static int getNoofChars(int n) {
+
+    /**
+     *
+     * @param number last number in defined range
+     * @return amount of digits
+     */
+    public static int getNoofDigits(int number) {
         int noofChars = 1;
 
-        if (n < 0) {
+        if (number < 0) {
             noofChars++;
-            n = n * (-1);
+            number *= (-1);
         }
 
-        for (int i = 10; i <= n; i *= 10) {
+        for (int i = 10; i <= number; i *= 10) {
             noofChars++;
         }
         return noofChars;
-    }
-// Entfernen da start und ende nicht vertauscht werden dürfen
-    public static int getMaxWidth(int start, int end) {
-        if (getNoofChars(start) > getNoofChars(end)) {
-            return getNoofChars(start);
-        } else {
-            return getNoofChars(end);
-        }
     }
 
     /**
@@ -132,33 +129,34 @@ public class Grp88_ueb01 {
      */
     public static void main(String[] args) {
         // Define a number range 
-        final int minNumber = 0;      // set min range number
-        final int maxNumber = 23;    // set max range number
-        final int colWidth = getMaxWidth(minNumber, maxNumber);
+        final int START_NUMBER = 0;      // set min range number
+        final int END_NUMBER = 2345;    // set max range number
+        final int COL_WIDTH = getNoofDigits(END_NUMBER);
 
-        // Runs all Numbers through defined range and checks for their properties
-        for (int counter = minNumber; counter < maxNumber; counter++) {
-            // Prime check
-            if (isPrim(counter) == true) {
-                System.out.printf("%" + colWidth + "d: belongs to Prime.\n", counter);
+        // in defined range examine all Numbers for their properties
+        for (int examNumber = START_NUMBER; examNumber < END_NUMBER; examNumber++) {
+            // Prime Number check
+            if (isPrim(examNumber) == true) {
+                System.out.printf("%" + COL_WIDTH + "d: belongs to Prime.\n", examNumber);
             }
-            // Fibo check
-            if (isFibo(counter) == true) {
-                System.out.printf("%" + colWidth + "d: belongs to Fibonacci.\n", counter);
+            // Fibonacci Number check
+            if (isFibo(examNumber) == true) {
+                System.out.printf("%" + COL_WIDTH + "d: belongs to Fibonacci.\n", examNumber);
             }
-            // Repd check
-            if (isRepd(counter) == true) {
-                System.out.printf("%" + colWidth + "d: belongs to Repdigit.\n", counter);
+            // Repdigit check
+            if (isRepd(examNumber) == true) {
+                System.out.printf("%" + COL_WIDTH + "d: belongs to Repdigit.\n", examNumber);
             }
-            // Crosssum check
-            if (isMult(counter, getCsum(counter)) == true) {
-                System.out.printf("%" + colWidth + "d: is a whole number multiple of the cross sum [%d]\n", counter, getCsum(counter));
+            // Cross Sum check
+            if (isMult(examNumber, getCsum(examNumber)) == true) {
+                System.out.printf("%" + COL_WIDTH + "d: is a whole number multiple of the cross sum [%d]\n", examNumber, getCsum(examNumber));
             }
-            // Crosssum Check v2
-            if (counter != 0 && counter % getCsum(counter) == 0) {
-                System.out.printf("%" + colWidth + "d: is a whole number multiple of the cross sum [%d]\n", counter, getCsum(counter));
-            }
-
+            /* Cross cSum check v2
+             * 
+             if (examNumber != 0 && examNumber % getCsum(examNumber) == 0) {
+             System.out.printf("%" + COL_WIDTH + "d: is a whole number multiple of the cross cSum [%d]\n", examNumber, getCsum(examNumber));
+             }
+             */
         }
 
     }
