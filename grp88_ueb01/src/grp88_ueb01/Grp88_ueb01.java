@@ -19,11 +19,11 @@ public class Grp88_ueb01 {
      */
     public static boolean isPrim(int curNum) {
         // exculude Zero
-        if (curNum == 0) {
+        if (curNum <= 0 || curNum % 2 == 0) {
             return false;
         }
         // try all values until squareroot of curNum 
-        for (int counter = 2; counter < Math.sqrt(curNum) + 1; counter++) {
+        for (int counter = 3; counter < Math.sqrt(curNum) + 1; counter+=2) {
             if (curNum % counter == 0) {
                 return false;
             }
@@ -106,7 +106,8 @@ public class Grp88_ueb01 {
     }
 
     /**
-     *
+     * calculate place values
+     * 
      * @param number last number in defined range
      * @return amount of digits
      */
@@ -117,7 +118,7 @@ public class Grp88_ueb01 {
             noofChars++;
             number *= (-1);
         }
-
+        
         for (int i = 10; i <= number; i *= 10) {
             noofChars++;
         }
@@ -129,8 +130,8 @@ public class Grp88_ueb01 {
      */
     public static void main(String[] args) {
         // Define a number range 
-        final int START_NUMBER = 0;      // set min range number
-        final int END_NUMBER = 2345;    // set max range number
+        final int START_NUMBER = -170;      // set min range number
+        final int END_NUMBER = 1145;    // set max range number
         final int COL_WIDTH = getNoofDigits(END_NUMBER);
 
         // in defined range examine all Numbers for their properties
