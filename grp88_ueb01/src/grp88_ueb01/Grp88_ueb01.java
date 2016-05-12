@@ -25,11 +25,11 @@ public class Grp88_ueb01 {
      */
     public static boolean isPrim(int curNum) {
         // exculude Zero
-        if (curNum <= 0 || curNum % 2 == 0) {
+        if (curNum <= 1) {
             return false;
         }
         // try all squared values until curNum 
-        for (int counter = 3; counter * counter < curNum + 1; counter+=2) {
+        for (int counter = 2; counter * counter <= curNum ; counter++) {
             if (curNum % counter == 0) {
                 return false;
             }
@@ -44,15 +44,15 @@ public class Grp88_ueb01 {
      * @return curNum belongs to Fibonacci Numbers
      */
     public static boolean isFibo(int curNum) {
-        int fiboA = 0, fiboB = 1, tmp = 0;
+        int fiboA = 0, fiboB = 1, result = 0;
         // Calculate all Fibonacci Numbers until curNum 
-        while (tmp < curNum) {
-            tmp = fiboA + fiboB;
+        while (result < curNum) {
+            result = fiboA + fiboB;
             fiboA = fiboB;
-            fiboB = tmp;
+            fiboB = result;
         }
         // Compare if last Fibonacci number equals curNum 
-        return tmp == curNum;
+        return result == curNum;
     }
 
     /**
