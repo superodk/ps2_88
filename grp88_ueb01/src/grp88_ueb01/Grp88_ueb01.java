@@ -9,6 +9,7 @@ package grp88_ueb01;
  *
  * @author ODK
  */
+//todo modulheader hinzufügen
 public class Grp88_ueb01 {
 
     /**
@@ -23,6 +24,7 @@ public class Grp88_ueb01 {
             return false;
         }
         // try all values until squareroot of curNum 
+        //todo math.sqrt ersetzten durch counter zum quadrat
         for (int counter = 3; counter < Math.sqrt(curNum) + 1; counter+=2) {
             if (curNum % counter == 0) {
                 return false;
@@ -38,6 +40,7 @@ public class Grp88_ueb01 {
      * @return curNum belongs to Fibonacci Numbers
      */
     public static boolean isFibo(int curNum) {
+        //todo aussagekräftige Variablennamen
         int a = 0, b = 1, c = 0;
         // Calculate all Fibonacci Numbers until curNum 
         while (c < curNum) {
@@ -63,10 +66,9 @@ public class Grp88_ueb01 {
         boolean repdigit = true;
         int compareValue = curNum % 10;
         // compare if digit in every place curNum equals itself
-        while (curNum != 0) {
+        while (curNum != 0 && repdigit) {
             if (compareValue != curNum % 10) {
                 repdigit = false;
-                break;
             }
             // remove last digit of curNum
             curNum /= 10;
@@ -99,10 +101,7 @@ public class Grp88_ueb01 {
      * @return
      */
     public static boolean isMult(int curNum, int cSum) {
-        if (curNum == 0) {
-            return false;
-        }
-        return (curNum % cSum == 0);
+        return cSum == 0 ? true : (curNum % cSum == 0);
     }
 
     /**
@@ -130,12 +129,12 @@ public class Grp88_ueb01 {
      */
     public static void main(String[] args) {
         // Define a number range 
-        final int START_NUMBER = -170;      // set min range number
-        final int END_NUMBER = 1145;    // set max range number
+        final int START_NUMBER = 0;      // set min range number
+        final int END_NUMBER = 2;    // set max range number
         final int COL_WIDTH = getNoofDigits(END_NUMBER);
 
         // in defined range examine all Numbers for their properties
-        for (int examNumber = START_NUMBER; examNumber < END_NUMBER; examNumber++) {
+        for (int examNumber = START_NUMBER; examNumber <= END_NUMBER; examNumber++) {
             // Prime Number check
             if (isPrim(examNumber) == true) {
                 System.out.printf("%" + COL_WIDTH + "d: belongs to Prime.\n", examNumber);
