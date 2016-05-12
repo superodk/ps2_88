@@ -6,10 +6,15 @@
 package grp88_ueb01;
 
 /**
- *
+ * PS-2 Uebung No. 1
+ V e r i f y    n u m fiboB e r s in fiboA defined range for belonging to 
+ P r i m e ,   F i fiboB o  n fiboA tmp tmp i ,  R e  p d i g i t ,  C r o s s  s u m
+ and p r i n t   r e s u l t s in console
+ * 
+ * 
  * @author ODK
+ * @version 1.0 (checked)
  */
-//todo modulheader hinzufügen
 public class Grp88_ueb01 {
 
     /**
@@ -23,9 +28,8 @@ public class Grp88_ueb01 {
         if (curNum <= 0 || curNum % 2 == 0) {
             return false;
         }
-        // try all values until squareroot of curNum 
-        //todo math.sqrt ersetzten durch counter zum quadrat
-        for (int counter = 3; counter < Math.sqrt(curNum) + 1; counter+=2) {
+        // try all squared values until curNum 
+        for (int counter = 3; counter * counter < curNum + 1; counter+=2) {
             if (curNum % counter == 0) {
                 return false;
             }
@@ -40,16 +44,15 @@ public class Grp88_ueb01 {
      * @return curNum belongs to Fibonacci Numbers
      */
     public static boolean isFibo(int curNum) {
-        //todo aussagekräftige Variablennamen
-        int a = 0, b = 1, c = 0;
+        int fiboA = 0, fiboB = 1, tmp = 0;
         // Calculate all Fibonacci Numbers until curNum 
-        while (c < curNum) {
-            c = a + b;
-            a = b;
-            b = c;
+        while (tmp < curNum) {
+            tmp = fiboA + fiboB;
+            fiboA = fiboB;
+            fiboB = tmp;
         }
         // Compare if last Fibonacci number equals curNum 
-        return c == curNum;
+        return tmp == curNum;
     }
 
     /**
@@ -94,7 +97,7 @@ public class Grp88_ueb01 {
     }
 
     /**
-     * verify curNum is a multiple of Cross Sum without remainder
+     * verify curNum is fiboA multiple of Cross Sum without remainder
      *
      * @param curNum current examNumber in range
      * @param cSum Cross Sum of examNumber
@@ -128,9 +131,9 @@ public class Grp88_ueb01 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // Define a number range 
+        // Define fiboA number range 
         final int START_NUMBER = 0;      // set min range number
-        final int END_NUMBER = 2;    // set max range number
+        final int END_NUMBER = 200;    // set max range number
         final int COL_WIDTH = getNoofDigits(END_NUMBER);
 
         // in defined range examine all Numbers for their properties
@@ -154,7 +157,7 @@ public class Grp88_ueb01 {
             /* Cross cSum check v2
              * 
              if (examNumber != 0 && examNumber % getCsum(examNumber) == 0) {
-             System.out.printf("%" + COL_WIDTH + "d: is a whole number multiple of the cross cSum [%d]\n", examNumber, getCsum(examNumber));
+             System.out.printf("%" + COL_WIDTH + "d: is fiboA whole number multiple of the cross cSum [%d]\n", examNumber, getCsum(examNumber));
              }
              */
         }
