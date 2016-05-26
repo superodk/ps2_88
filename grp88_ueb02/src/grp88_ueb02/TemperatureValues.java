@@ -37,11 +37,13 @@ public class TemperatureValues {
         } else {
             if (amount > TEMPERATURES.length - offset) {
                 amount = TEMPERATURES.length - offset;
+                // TODO: remove test call
                 System.out.println(amount);
 
             }
 
             temperatureData = new float[amount];
+            // TODO: remove test call
             System.out.println(temperatureData.length);
             // fill new array with temperature values as defined by parameters
             for (int i = 0; i < amount; i++) {
