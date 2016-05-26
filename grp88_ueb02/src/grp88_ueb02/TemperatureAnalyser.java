@@ -1,4 +1,4 @@
-package grp00_ueb02;
+package grp88_ueb02;
 
 /**
  * Enthält Funktionen zur Analyse der Daten aus TemperatureValues.

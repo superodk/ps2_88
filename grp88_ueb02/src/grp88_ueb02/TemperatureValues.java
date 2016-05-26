@@ -22,16 +22,33 @@ public class TemperatureValues {
     };
 
     /**
-     * print TEMPERATURE[] elements
+     * gets temperature data as defined by parameters
      *
-     * @param offset index to start from
-     * @param amount amount of elements to print
+     * @param offset index position
+     * @param amount amount of data
+     * @return temperature data array
      */
-    public static void getTemperatures(int offset, int amount) {
+    public static float[] getTemperatures(int offset, int amount) {
+        // define a new array + allocate space 
+        float[] temperatureData;
+        // exception handling
+        if (offset > TEMPERATURES.length) {
+            temperatureData = null;
+        } else {
+            if (amount > TEMPERATURES.length - offset) {
+                amount = TEMPERATURES.length - offset;
+                System.out.println(amount);
 
-        for (int i = offset; i < offset + amount; i++) {
-            System.out.println("Temp: " + TEMPERATURES[i]);
+            }
+
+            temperatureData = new float[amount];
+            System.out.println(temperatureData.length);
+            // fill new array with temperature values as defined by parameters
+            for (int i = 0; i < amount; i++) {
+                temperatureData[i] = TEMPERATURES[offset + i];
+            }
         }
+        return temperatureData;
     }
 ;
 
