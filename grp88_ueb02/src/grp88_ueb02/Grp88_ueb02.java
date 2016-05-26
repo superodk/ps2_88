@@ -17,16 +17,7 @@ public class Grp88_ueb02 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-//        float[] tempdata;
-//        int offset = 100;
-//        
-//        tempdata = TemperatureValues.getTemperatures(100, 4);
-//        
-//        for (int i = 0; i < offset; i++){
-//            System.out.println(tempdata[i]);
-//            
-//        }
+        // TODO: remove array print test
         System.out.println(Arrays.toString(TemperatureValues.getTemperatures(110, 50)));
         
     }

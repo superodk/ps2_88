@@ -20,7 +20,8 @@ public class TemperatureAnalyser {
     private static final int MONTHS = DAYS_PER_MONTH.length;    
     /**
      * ungültiger Temperaturwert.
+     * TODO: remove comment
      */
-    private static final float INVALID_TEMPERATURE = Utilities.INVALID_TEMPERATURE;	
+    //private static final float INVALID_TEMPERATURE = Utilities.INVALID_TEMPERATURE;	
 
 }
