@@ -10,7 +10,7 @@ package grp88_ueb01;
  V e r i f y    n u m fiboB e r s in fiboA defined range for belonging to 
  P r i m e ,   F i fiboB o  n fiboA tmp tmp i ,  R e  p d i g i t ,  C r o s s  s u m
  and p r i n t   r e s u l t s in console
- * 
+ *
  * 
  * @author ODK
  * @version 1.0 (checked)
@@ -162,6 +162,6 @@ public class Grp88_ueb01 {
              */
         }
 
-    }
+}
 
 }
