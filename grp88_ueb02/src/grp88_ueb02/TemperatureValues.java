@@ -1,17 +1,34 @@
+/*
+ * Copyright (C) 2016 ODK
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ */
 package grp88_ueb02;
 
 /**
  * Gegebene Daten in Form eines Zahlenarrays (gemessene Temperaturen)
  *
  * @author ODK / IAW100728
- * @version Mai 26, 2016
+ * @version UNFINISHED
  */
 public class TemperatureValues {
 
     /**
      * Gemessene Temperaturen.
      */
-    private static final float[] TEMPERATURES = {
+    static final float[] TEMPERATURES = {
         2, -1, 3, 7, 8, 3, 2, 5, 6, 8, 11, 15, 13, 16, 18, 20, 21, 5,
         10, 1, 8, 6, 4, 5, 7, 8, 21, 18, 19, 20, 17, 15, 16, 14, 15, 13,
         18, 17, 18, 19, 21, 22, 20, 19, 21, 21, 22, 25, 26, 25, 25, 26, 25, 26,
@@ -21,37 +38,27 @@ public class TemperatureValues {
         12, 10, 8, 10, 11, 5, 3, 1, -3, 5, 2.5f, -5.5f
     };
 
-    /**
-     * gets temperature data as defined by parameters
-     *
-     * @param offset index position
-     * @param amount amount of data
+    /** gets temperature data as defined by parameters
+     *  from TEMPERATUES array
+     * 
+     * @param offset index position (TEMPERATURES)
+     * @param amount amount of data to copy
      * @return temperature data array
      */
     public static float[] getTemperatures(int offset, int amount) {
-        // define a new array + allocate space 
-        float[] temperatureData;
-        // exception handling
-        if (offset > TEMPERATURES.length) {
-            temperatureData = null;
+        float[] temperatureData;  // define internal array
+
+        if (offset > TEMPERATURES.length) {  // exception: (offset) invalid TEMPERATURES index
+            temperatureData = null;             // return array {null}
         } else {
-            if (amount > TEMPERATURES.length - offset) {
-                amount = TEMPERATURES.length - offset;
-                // TODO: remove test call
-                System.out.println(amount);
-
+            if (amount > TEMPERATURES.length - offset) {  // exception: (amount) invalid TEMPERATURES range
+                amount = TEMPERATURES.length - offset;    // adjust to TEMPERATURES possible range
             }
-
-            temperatureData = new float[amount];
-            // TODO: remove test call
-            System.out.println(temperatureData.length);
-            // fill new array with temperature values as defined by parameters
-            for (int i = 0; i < amount; i++) {
+            temperatureData = new float[amount];  // define new array size           
+            for (int i = 0; i < amount; i++) {    // fill internal array
                 temperatureData[i] = TEMPERATURES[offset + i];
             }
         }
         return temperatureData;
     }
-;
-
 }
