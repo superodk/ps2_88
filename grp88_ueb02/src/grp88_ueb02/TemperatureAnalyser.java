@@ -118,9 +118,10 @@ public class TemperatureAnalyser {
      */
     public static int countTemperaturesinRange(int min, int max) {
         int days = 0;
-        //FIXME durch TEMPERATURES_PER_MONTH laufen
-        for (int index = 0; index < TemperatureValues.TEMPERATURES.length; index++) {
-            if (TemperatureValues.TEMPERATURES[index] > min && TemperatureValues.TEMPERATURES[index] <= max) {
+        //FIXME durch TEMPERATURES_PER_MONTH laufen        
+        for (int monthIndex = 0; monthIndex < MONTHS; monthIndex++) {
+            for ( int dayIndex = 0; dayIndex < TEMPERATURES_PER_MONTH[monthIndex][dayIndex]; dayIndex++)
+               if ((TEMPERATURES_PER_MONTH[monthIndex][dayIndex] > min) && (TEMPERATURES_PER_MONTH[monthIndex][dayIndex] <= max)) {
                 days += 1;
             } 
         }
