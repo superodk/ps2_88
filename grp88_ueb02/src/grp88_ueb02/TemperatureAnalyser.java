@@ -17,6 +17,8 @@
  */
 package grp88_ueb02;
 
+import java.util.Arrays;
+
 /**
  * Enthält Funktionen zur Analyse der Daten aus TemperatureValues.
  *
@@ -24,43 +26,149 @@ package grp88_ueb02;
  * @version UNFINISHED
  */
 public class TemperatureAnalyser {
-    /* TODO: private Konstanten
-    ein Array DAYS_PER_MONTH, welches die Anzahl der Tage pro Monat enthält,
-    */
-    
-    /* TODO: private Konstante
-    ein Wert MONTHS, der die Anzahl der zu untersuchenden Monate gemäß des 
-    Arrays DAYS_PER_MONTH enthält,
-    */
-    
-    /*TODO: private Konstante
-    ein Wert INVALID_TEMPERATURE, der den Wert aus der Klasse Utilities übernimmt.
-    */
-    
-    /* TODO: Klassenvariable 
-    ein nach Monaten aufgeschlüsseltes zweidimensionales Array 
-    TEMPERATURES_PER_MONTH mit den Tagestemperaturen
-    */
-    
-    /*TODO: Klassenvariable
-    eindimensionales Array AVERAGE_MONTH_TEMPERATURES mit den 
-    Durchschnittstemperaturen der einzelnen Monate erstellt
-    */
 
-    /** TODO:
-     * Angabe, wieviele Tage ein Monat jeweils besitzt.
-     * Um mit weniger Testdaten arbeiten zu können, sind die Monate hier sehr kurz.
-     * Die Summe der Tage kann mit der Anzahl der Testdaten übereinstimmen,
-     * muss aber nicht!
-     */
-    private static final int[] DAYS_PER_MONTH = new int[] {10, 12, 31, 30, 25, 29};
-    
+    // gets invalid temperature (MAX) from Class Utilities
+    private static final float INVALID_TEMPERATURE = Utilities.INVALID_TEMPERATURE;
+    // amount of days with temp data per month
+    private static final int[] DAYS_PER_MONTH = new int[]{10, 12, 31, 30, 25, 29};
+    // amount of months with temperature data 
+    private static final int MONTHS = DAYS_PER_MONTH.length;
+
+    //TODO: change to private
     /**
-     * Angabe, für wie viele Monate die Tagesangaben vorliegen. gemäß des Arrays DAYS_PER_MONTH
+     * create day temperatures values per month using
+     * TemperatureValues.TEMPERATURES array
+     *
+     * @return 2-D array values
      */
-    private static final int MONTHS = DAYS_PER_MONTH.length; 
-    
-    // ungültiger Temperaturwert
-    private static final float INVALID_TEMPERATURE = Utilities.INVALID_TEMPERATURE;	
+    public static float[][] createTemperaturesPerMonth() {
+        // erstelle 2Darray mit der länge MONTHS als D1
+        float[][] temperaturesPerMonth = new float[MONTHS][];
+        // init position in array (temperatures) index
+        int temperaturesIndexPosition = 0;
+        // generate amount of months(rows)
+        for (int month = 0; month < MONTHS; month++) {
+            // create array with temperature Data of current Month [code readability]
+            float[] temperatureData = TemperatureValues.getTemperatures(temperaturesIndexPosition, DAYS_PER_MONTH[month]);
+            // define size of month(row)
+            temperaturesPerMonth[month] = new float[DAYS_PER_MONTH[month]];
+            // fill days(columns) with temperature data
+            temperaturesPerMonth[month] = temperatureData.clone();
+            temperaturesIndexPosition = +DAYS_PER_MONTH[month];
+        }
+        return temperaturesPerMonth;
+    }
+    // constant array[month][day temp] with day temperatures per month
+    static final float[][] TEMPERATURES_PER_MONTH = createTemperaturesPerMonth();
+
+    //TODO: change to private
+    /**
+     * creates average month temperatures
+     *
+     * @return 1-D array values
+     */
+    public static float[] createAverageTemperatures() {
+        // define array with size
+        float[] averageTemperatures = new float[MONTHS];
+        for (int month = 0; month < MONTHS; month++) {
+            averageTemperatures[month] = Utilities.getAverage(TEMPERATURES_PER_MONTH[month]);
+        }
+        return averageTemperatures;
+    }
+    // constant array[] with average month temperature values
+    static final float[] AVERAGE_MONTH_TEMPERATURES = createAverageTemperatures();
+
+    /**
+     * gets months day temperatures
+     *
+     * @param month
+     * @return 1-D array values
+     */
+    public static float[] getTemperatures(int month) {
+        // month-1 start with 1
+        float[] daysTemperatures = new float[TEMPERATURES_PER_MONTH[month].length];
+        for (int day = 0; day < daysTemperatures.length; day++) {
+            daysTemperatures[day] = TEMPERATURES_PER_MONTH[month][day];
+        }
+        return daysTemperatures;
+    }
+
+    /**
+     * get average temperature of month
+     *
+     * @param month month as number value
+     * @return average temperature of
+     */
+    public static float getAverage(int month) {
+        float averageTemperature;
+        averageTemperature = (month == 0 || month > MONTHS) ? INVALID_TEMPERATURE : Utilities.getAverage(TEMPERATURES_PER_MONTH[month]);
+        return averageTemperature;
+    }
+
+    /**
+     * count amount of days with temperature in between
+     *
+     * @param min minimum Temperature
+     * @param max
+     * @return
+     */
+    public static int countTemperaturesinRange(int min, int max) {
+        int days = 0;
+        for (int index = 0; index < TemperatureValues.TEMPERATURES.length; index++) {
+            if (TemperatureValues.TEMPERATURES[index] < min || TemperatureValues.TEMPERATURES[index] > max) {
+            } else {
+                days = +1;
+            }
+        }
+        return days;
+    }
+
+    /**
+     * get year average temperature
+     *
+     * @return average temperature value
+     */
+    public static float getYearAverage() {
+        float yearAverage = Utilities.getAverage(AVERAGE_MONTH_TEMPERATURES);
+        return yearAverage;
+    }
+
+    /**
+     * get coldest month
+     *
+     * @return month number value
+     */
+    public static int getColdestMonth() {
+        // define as maximum available float value
+        float minValue = Float.MAX_VALUE;
+        // define coldestMonth variable;
+        int coldestMonth = 0;
+        for (int month = 0; month < AVERAGE_MONTH_TEMPERATURES.length; month++) {
+            if (AVERAGE_MONTH_TEMPERATURES[month] < minValue) {
+                minValue = AVERAGE_MONTH_TEMPERATURES[month];
+                // set month with smallest value
+                coldestMonth = month;
+            }
+        }
+        return coldestMonth;
+    }
+
+    /**
+     * get warmest month
+     *
+     * @return month number value
+     */
+    public static int getWarmestMonth() {
+        float maxValue = Float.MIN_VALUE;
+        int warmestMonth = 0;
+        for (int month = 0; month < AVERAGE_MONTH_TEMPERATURES.length; month++) {
+            if (AVERAGE_MONTH_TEMPERATURES[month] > maxValue) {
+                maxValue = AVERAGE_MONTH_TEMPERATURES[month];
+                // set month with smallest value
+                warmestMonth = month;
+            }
+        }
+        return warmestMonth;
+    }
 
 }

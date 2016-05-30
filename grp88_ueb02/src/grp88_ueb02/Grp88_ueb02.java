@@ -26,23 +26,43 @@ import java.util.Arrays;
  * @version UNFINISHED
  */
 public class Grp88_ueb02 {
-    
+
+    // define temperature range
+    static final int RANGE = 10;
+    // define amount of ranges to search
+    static final int STEPS = 5;
+    // define names for month number values
     static final String[] MONTH_NAMES = {"January", "February", "March",
         "April", "May", "June", "July", "August", "September", "October",
         "November", "December"};
-    
-    /*TODO: 
-    STEPS enthält die Anzahl der Temperaturbereiche, die als letztes ausgegeben werden sollen
-    /*
-    
-    /*TODO: RANGE 
-    enthält die Temperaturspanne, die jeweils beachtet werden soll.
-    /*
-    
+
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        // private routin to algin the results
+
+        // coldest month and temperature
+        System.out.format("The coldest month was %s with %.2f°C average.%n", MONTH_NAMES[TemperatureAnalyser.getColdestMonth()], TemperatureAnalyser.AVERAGE_MONTH_TEMPERATURES[TemperatureAnalyser.getColdestMonth()]);
+        // warmest month and temperature
+        System.out.format("The coldest month was %s with %.2f°C average.%n", MONTH_NAMES[TemperatureAnalyser.getWarmestMonth()], TemperatureAnalyser.AVERAGE_MONTH_TEMPERATURES[TemperatureAnalyser.getWarmestMonth()]);
+        // yearaverage
+        System.out.format("The average temperature this year was %.2f°C.%n", TemperatureAnalyser.getYearAverage());
+        // empty println
+        System.out.println();
+        // median of the first month
+        System.out.format("The median in january was %.2f°C.%n", Utilities.getMedian(TemperatureAnalyser.getTemperatures(0)));
+        // Temperature of the first day in first month
+        System.out.format("The temperature in the first day of january was %.2f°C.%n", TemperatureAnalyser.TEMPERATURES_PER_MONTH[0][0]);
+        // empty println
+        System.out.println();
+        // temperatures under 0°C (-50 - 0)
+        //System.out.format(format, args);
+        // in STEPS begining with 0° - amount of days that are in the defined RANGE
+        // use private routine printTemperaturesInRange(int min, int max)
+
+        /*
+        //TODO: remove TEST CALLS       
         //TODO: remove final in consts
         final int OFFSET = 0;
         final int AMOUNT = 9;
@@ -69,7 +89,23 @@ public class Grp88_ueb02 {
         // TODO: remove out.println
         System.out.println("Calc. Average: "
                 + Utilities.getAverage(TemperatureValues.getTemperatures(OFFSET, AMOUNT)));
-
+        
+        // TODO: remove out.println
+        System.out.println("TemperaturesPerMonths Arrray: "
+                + TemperatureAnalyser.createTemperaturesPerMonth()); 
+        
+        // TODO: remove out.println
+        System.out.println("average Month temperatures Arrray: "
+                + Arrays.toString(TemperatureAnalyser.createAverageTemperatures()));
+        
+        // TODO: remove out.println
+        System.out.println("coldest month: "
+                + TemperatureAnalyser.getColdestMonth());
+        
+        // TODO: remove out.println
+        System.out.println("YearAverage: "
+                + TemperatureAnalyser.getYearAverage()); 
+         */
     }
 
 }
