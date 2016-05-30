@@ -61,14 +61,17 @@ public class Utilities {
      * @return determined median value
      */
     public static float getMedian(float[] suppliedArray) {
+        if ((null == suppliedArray) || (0 == suppliedArray.length)) {
+            return INVALID_TEMPERATURE;
+        }
         // define array with presorted values
         float[] sortedArray = getSortedArray(suppliedArray);
         float median; // calculated median
         // check even or odd amount of array elements (suppliedArray)
         if (sortedArray.length % 2 == 0) { // case: even number
-            median = ((float) sortedArray[sortedArray.length / 2] + (float) sortedArray[sortedArray.length / 2 - 1]) / 2;
+            median = ( sortedArray[sortedArray.length / 2] +  sortedArray[sortedArray.length / 2 - 1]) / 2;
         } else {                           // case: odd number
-            median = (float) sortedArray[sortedArray.length / 2];
+            median =  sortedArray[sortedArray.length / 2];
         }
         return median;
     }
@@ -80,13 +83,17 @@ public class Utilities {
      * @return determined average value
      */
     public static float getAverage(float[] suppliedArray) {
+        if ((null == suppliedArray) || (0 == suppliedArray.length)) {
+            return INVALID_TEMPERATURE;
+        }        
         float sum = 0; // init sum variable with zero
         // calc. sum of all array elements
         for (float value : suppliedArray) {
+            //FIXME invalide Werte nicht aufsummieren
             sum += value;
         }
         // define average with calc. average value
-        float average = sum / suppliedArray.length;
+        float average = sum / suppliedArray.length; //FIXME nur durch Anzahl valider Werte teilen
         return average;
     }
 ;

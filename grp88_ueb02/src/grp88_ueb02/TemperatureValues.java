@@ -28,7 +28,7 @@ public class TemperatureValues {
     /**
      * Gemessene Temperaturen.
      */
-    static final float[] TEMPERATURES = {
+    private static final float[] TEMPERATURES = {
         2, -1, 3, 7, 8, 3, 2, 5, 6, 8, 11, 15, 13, 16, 18, 20, 21, 5,
         10, 1, 8, 6, 4, 5, 7, 8, 21, 18, 19, 20, 17, 15, 16, 14, 15, 13,
         18, 17, 18, 19, 21, 22, 20, 19, 21, 21, 22, 25, 26, 25, 25, 26, 25, 26,
@@ -49,7 +49,9 @@ public class TemperatureValues {
         float[] temperatureData;  // define internal array
 
         if (offset > TEMPERATURES.length) {  // exception: (offset) invalid TEMPERATURES index
-            temperatureData = null;             // return array {null}
+//            temperatureData = null;             // return array {null}
+            temperatureData = new float[0];             // return array {null}
+            
         } else {
             if (amount > TEMPERATURES.length - offset) {  // exception: (amount) invalid TEMPERATURES range
                 amount = TEMPERATURES.length - offset;    // adjust to TEMPERATURES possible range

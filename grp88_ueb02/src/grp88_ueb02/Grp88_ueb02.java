@@ -43,17 +43,21 @@ public class Grp88_ueb02 {
         // private routin to algin the results
 
         // coldest month and temperature
-        System.out.format("The coldest month was %s with %.2f°C average.%n", MONTH_NAMES[TemperatureAnalyser.getColdestMonth()], TemperatureAnalyser.AVERAGE_MONTH_TEMPERATURES[TemperatureAnalyser.getColdestMonth()]);
+        System.out.format("The coldest month was %s with %.2f°C average.%n", 
+                MONTH_NAMES[TemperatureAnalyser.getColdestMonth() - 1], 
+                TemperatureAnalyser.getTemperatures(TemperatureAnalyser.getColdestMonth()));
         // warmest month and temperature
-        System.out.format("The coldest month was %s with %.2f°C average.%n", MONTH_NAMES[TemperatureAnalyser.getWarmestMonth()], TemperatureAnalyser.AVERAGE_MONTH_TEMPERATURES[TemperatureAnalyser.getWarmestMonth()]);
+        System.out.format("The coldest month was %s with %.2f°C average.%n",
+                MONTH_NAMES[TemperatureAnalyser.getWarmestMonth()-1],
+                TemperatureAnalyser.getTemperatures(TemperatureAnalyser.getWarmestMonth()));
         // yearaverage
         System.out.format("The average temperature this year was %.2f°C.%n", TemperatureAnalyser.getYearAverage());
         // empty println
         System.out.println();
         // median of the first month
-        System.out.format("The median in january was %.2f°C.%n", Utilities.getMedian(TemperatureAnalyser.getTemperatures(0)));
+        System.out.format("The median in january was %.2f°C.%n", Utilities.getMedian(TemperatureAnalyser.getTemperatures(1)));
         // Temperature of the first day in first month
-        System.out.format("The temperature in the first day of january was %.2f°C.%n", TemperatureAnalyser.TEMPERATURES_PER_MONTH[0][0]);
+        System.out.format("The temperature in the first day of january was %.2f°C.%n", TemperatureAnalyser.getTemperatures(1)[0]);
         // empty println
         System.out.println();
         // temperatures under 0°C (-50 - 0)
@@ -61,50 +65,51 @@ public class Grp88_ueb02 {
         // in STEPS begining with 0° - amount of days that are in the defined RANGE
         // use private routine printTemperaturesInRange(int min, int max)
 
+        //FIXME Ausgabe in STEPS, RANGES
         /*
-        //TODO: remove TEST CALLS       
-        //TODO: remove final in consts
-        final int OFFSET = 0;
-        final int AMOUNT = 9;
+         //TODO: remove TEST CALLS       
+         //TODO: remove final in consts
+         final int OFFSET = 0;
+         final int AMOUNT = 9;
         
-        // TODO: remove out.println
-        System.out.println(TemperatureValues.getTemperatures(OFFSET, AMOUNT).length);
+         // TODO: remove out.println
+         System.out.println(TemperatureValues.getTemperatures(OFFSET, AMOUNT).length);
         
-        // TODO: remove out.println
-        System.out.println("Refined Array: "
-                + Arrays.toString(TemperatureValues.getTemperatures(OFFSET, AMOUNT)));
+         // TODO: remove out.println
+         System.out.println("Refined Array: "
+         + Arrays.toString(TemperatureValues.getTemperatures(OFFSET, AMOUNT)));
 
-        // TODO: remove out.println
-        // print sorted array
-        System.out.println("Sorted Array: "
-                + Arrays.toString(Utilities.getSortedArray(TemperatureValues.getTemperatures(OFFSET, AMOUNT))));
+         // TODO: remove out.println
+         // print sorted array
+         System.out.println("Sorted Array: "
+         + Arrays.toString(Utilities.getSortedArray(TemperatureValues.getTemperatures(OFFSET, AMOUNT))));
         
-        //TODO: remove out.println
-        System.out.println("Original Array: " + Arrays.toString(TemperatureValues.TEMPERATURES));
+         //TODO: remove out.println
+         System.out.println("Original Array: " + Arrays.toString(TemperatureValues.TEMPERATURES));
 
-        // TODO: remove out.println
-        System.out.println("Calc. Median: "
-                + Utilities.getMedian(TemperatureValues.getTemperatures(OFFSET, AMOUNT)));
+         // TODO: remove out.println
+         System.out.println("Calc. Median: "
+         + Utilities.getMedian(TemperatureValues.getTemperatures(OFFSET, AMOUNT)));
 
-        // TODO: remove out.println
-        System.out.println("Calc. Average: "
-                + Utilities.getAverage(TemperatureValues.getTemperatures(OFFSET, AMOUNT)));
+         // TODO: remove out.println
+         System.out.println("Calc. Average: "
+         + Utilities.getAverage(TemperatureValues.getTemperatures(OFFSET, AMOUNT)));
         
-        // TODO: remove out.println
-        System.out.println("TemperaturesPerMonths Arrray: "
-                + TemperatureAnalyser.createTemperaturesPerMonth()); 
+         // TODO: remove out.println
+         System.out.println("TemperaturesPerMonths Arrray: "
+         + TemperatureAnalyser.createTemperaturesPerMonth()); 
         
-        // TODO: remove out.println
-        System.out.println("average Month temperatures Arrray: "
-                + Arrays.toString(TemperatureAnalyser.createAverageTemperatures()));
+         // TODO: remove out.println
+         System.out.println("average Month temperatures Arrray: "
+         + Arrays.toString(TemperatureAnalyser.createAverageTemperatures()));
         
-        // TODO: remove out.println
-        System.out.println("coldest month: "
-                + TemperatureAnalyser.getColdestMonth());
+         // TODO: remove out.println
+         System.out.println("coldest month: "
+         + TemperatureAnalyser.getColdestMonth());
         
-        // TODO: remove out.println
-        System.out.println("YearAverage: "
-                + TemperatureAnalyser.getYearAverage()); 
+         // TODO: remove out.println
+         System.out.println("YearAverage: "
+         + TemperatureAnalyser.getYearAverage()); 
          */
     }
 
