@@ -18,20 +18,18 @@
 package grp88_ueb02;
 
 /**
- * Subroutines for arrays
- * sort, median, average
+ * Subroutines for arrays sort, median, average
  *
  * @author ODK / IAW100728
  * @version FINISHED*
  */
 public class Utilities {
 
-    // TODO: a wrong temperature? was das?
+    // wrong temperature
     public static final float INVALID_TEMPERATURE = -Float.MAX_VALUE;
 
     /**
-     * Sorts array 
-     * sorts elements in descending order
+     * Sorts array sorts elements in descending order
      *
      * @param suppliedArray array with elements to process
      * @return create sorted array
@@ -54,8 +52,7 @@ public class Utilities {
     }
 
     /**
-     * Calculate median 
-     * uses separate calculation for even and odd arrays
+     * Calculate median uses separate calculation for even and odd arrays
      *
      * @param suppliedArray array with elements to process
      * @return determined median value
@@ -69,9 +66,9 @@ public class Utilities {
         float median; // calculated median
         // check even or odd amount of array elements (suppliedArray)
         if (sortedArray.length % 2 == 0) { // case: even number
-            median = ( sortedArray[sortedArray.length / 2] +  sortedArray[sortedArray.length / 2 - 1]) / 2;
+            median = (sortedArray[sortedArray.length / 2] + sortedArray[sortedArray.length / 2 - 1]) / 2;
         } else {                           // case: odd number
-            median =  sortedArray[sortedArray.length / 2];
+            median = sortedArray[sortedArray.length / 2];
         }
         return median;
     }
@@ -85,15 +82,20 @@ public class Utilities {
     public static float getAverage(float[] suppliedArray) {
         if ((null == suppliedArray) || (0 == suppliedArray.length)) {
             return INVALID_TEMPERATURE;
-        }        
+        }
         float sum = 0; // init sum variable with zero
+        int counter = 0;
         // calc. sum of all array elements
         for (float value : suppliedArray) {
-            //FIXME invalide Werte nicht aufsummieren
-            sum += value;
+            //FIXME (DONE) invalide Werte nicht aufsummieren
+            if (value != INVALID_TEMPERATURE) {
+                sum += value;
+                counter++;
+            }
+
         }
         // define average with calc. average value
-        float average = sum / suppliedArray.length; //FIXME nur durch Anzahl valider Werte teilen
+        float average = sum / counter; //FIXME (DONE) nur durch Anzahl valider Werte teilen
         return average;
     }
 ;

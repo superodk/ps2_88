@@ -44,12 +44,11 @@ public class Grp88_ueb02 {
 
         // coldest month and temperature
         System.out.format("The coldest month was %s with %.2f°C average.%n", 
-                MONTH_NAMES[TemperatureAnalyser.getColdestMonth() - 1], 
-                TemperatureAnalyser.getTemperatures(TemperatureAnalyser.getColdestMonth()));
+                MONTH_NAMES[TemperatureAnalyser.getColdestMonth() - 1], TemperatureAnalyser.getAverage(TemperatureAnalyser.getColdestMonth()));
         // warmest month and temperature
-        System.out.format("The coldest month was %s with %.2f°C average.%n",
-                MONTH_NAMES[TemperatureAnalyser.getWarmestMonth()-1],
-                TemperatureAnalyser.getTemperatures(TemperatureAnalyser.getWarmestMonth()));
+        System.out.format("The warmest month was %s with %.2f°C average.%n",
+                MONTH_NAMES[TemperatureAnalyser.getWarmestMonth() - 1],
+                TemperatureAnalyser.getAverage(TemperatureAnalyser.getWarmestMonth()));
         // yearaverage
         System.out.format("The average temperature this year was %.2f°C.%n", TemperatureAnalyser.getYearAverage());
         // empty println
