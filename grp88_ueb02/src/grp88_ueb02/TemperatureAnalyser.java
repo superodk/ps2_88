@@ -112,9 +112,8 @@ public class TemperatureAnalyser {
      * @param max
      * @return
      */
-    public static int countTemperaturesinRange(int min, int max) {
-        int days = 0;
-        //FIXME durch TEMPERATURES_PER_MONTH laufen        
+    public static int countTemperaturesInRange(int min, int max) {
+        int days = 0;       
         for (int monthIndex = 0; monthIndex < MONTHS; monthIndex++) {
             for ( int dayIndex = 0; dayIndex < TEMPERATURES_PER_MONTH[monthIndex].length; dayIndex++)
                if ((TEMPERATURES_PER_MONTH[monthIndex][dayIndex] > min) && (TEMPERATURES_PER_MONTH[monthIndex][dayIndex] <= max)) {
@@ -145,8 +144,7 @@ public class TemperatureAnalyser {
         // define coldestMonth variable;
         int coldestMonth = 0;
         for (int monthIndex = 0; monthIndex < AVERAGE_MONTH_TEMPERATURES.length; monthIndex++) {
-            //FIXME invalide Werte nicht betrachten
-            if (AVERAGE_MONTH_TEMPERATURES[monthIndex] < minValue) {
+            if ((AVERAGE_MONTH_TEMPERATURES[monthIndex] < minValue) && (AVERAGE_MONTH_TEMPERATURES[monthIndex] != INVALID_TEMPERATURE)) {
                 minValue = AVERAGE_MONTH_TEMPERATURES[monthIndex];
                 // set month with smallest value
                 coldestMonth = monthIndex;
