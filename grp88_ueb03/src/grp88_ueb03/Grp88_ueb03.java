@@ -369,14 +369,14 @@ public class Grp88_ueb03 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        testSize();
+        //testSize();
         testShowValues();
-        testInsertElementSorted();
-        testIsSorted();
-        testContainsValue();
-        testGetValueAt();
-        testInsertElementAt();
-        testInsertElementAtFront();
-        testInsertSortedIfUnique();
+        //testInsertElementSorted();
+        //testIsSorted();
+        //testContainsValue();
+        //testGetValueAt();
+        //testInsertElementAt();
+        //testInsertElementAtFront();
+        //testInsertSortedIfUnique();
     }
 }

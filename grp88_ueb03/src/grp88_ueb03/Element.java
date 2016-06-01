@@ -11,10 +11,10 @@ package grp88_ueb03;
  */
 public class Element {
 
-    private int value;
+    private char value;
     private Element next;
 
-    public void setValue(int value) {
+    public void setValue(char value) {
         this.value = value;
     }
 
@@ -22,7 +22,15 @@ public class Element {
         this.next = next;
     }
 
-    public Element appendElement(int value) {
+    public char getValue() {
+        return value;
+    }
+
+    public Element getNext() {
+        return next;
+    }
+
+    public Element appendElement(char value) {
         if (this.next == null) {
             Element newElement = new Element();
             newElement.setValue(value);
@@ -33,7 +41,7 @@ public class Element {
         return this;
     }
 
-    public Element insertElement(int value) {
+    public Element insertElement(char value) {
         if (this.value > value) {
             Element newElement = new Element();
             newElement.setValue(value);
@@ -50,7 +58,7 @@ public class Element {
         }
     }
 
-    public Element deleteElement(int value) {
+    public Element deleteElement(char value) {
         if (this.value == value) {
             return this.next;
         } else {
@@ -58,9 +66,14 @@ public class Element {
                 this.next = this.next.deleteElement(value);
             }
             return this;
-
         }
+    }
 
+    public Element showValues(Element next) {        
+        System.out.println(getNext());
+        return this;
     }
 
 }
+
+

@@ -17,7 +17,7 @@ public class List {
         return elements == null;
     }
 
-    public void appendElement(int value) {
+    public void appendElement(char value) {
         if (this.isEmpty()) {
             elements = new Element();
             elements.setValue(value);
@@ -27,7 +27,7 @@ public class List {
 
     }
 
-    public void insertElement(int value) {
+    public void insertElement(char value) {
         if (this.isEmpty()) {
             elements = new Element();
             elements.setValue(value);
@@ -36,17 +36,35 @@ public class List {
         }
     }
 
-    public void deleteElement(int value) {
+    public void deleteElement(char value) {
         if (!isEmpty()) {
             elements = elements.deleteElement(value);
         }
     }
 
-    public void printList() {
-        if (!isEmpty()) {
-            elements.printList();
-        }
+    /**
+     * @author ODK
+     * @return
+     */
+    public Element showValues() {
+        //elements = new Element();
+        value =;
+        elements = elements.toString();
+        return value;
     }
-}
 
 }
+
+//    /**
+//     * @author ODK
+//     * @return
+//     */
+//    public String showValues() {
+//        Element element = elements;
+//        String values = "";
+//        while (element != null) {
+//            values += element.getValue();
+//            element = element.getNext();
+//        }
+//        return values;
+//    }
