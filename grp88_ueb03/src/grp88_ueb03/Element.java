@@ -69,12 +69,12 @@ public class Element {
         }
     }
 
-    public char showValues() {
+    public String showValues() {
         if (next != null) {
-            value += getValue();
+            return  getValue() + "," + this.next.showValues();
 
         }
-        return value;
+        return value + "";
     }
 
     /**

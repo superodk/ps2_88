@@ -50,15 +50,14 @@ public class List {
             return 0;
         }
     }
-    
+
     public String showValues() {
-        String values = "";
         if (!isEmpty()) {
-            values += elements.getValue();
-            elements = elements.getNext();
+            return "{" + elements.showValues() + "}";
+        } else {
+            return "{}";
         }
-        return values;
-        
+
     }
 
     /**
