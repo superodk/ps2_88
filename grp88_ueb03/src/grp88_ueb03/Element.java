@@ -23,11 +23,11 @@ public class Element {
     }
 
     public char getValue() {
-        return value;
+        return this.value;
     }
 
     public Element getNext() {
-        return next;
+        return this.next;
     }
 
     public Element appendElement(char value) {
@@ -69,11 +69,31 @@ public class Element {
         }
     }
 
-    public Element showValues(Element next) {        
-        System.out.println(getNext());
-        return this;
+    public char showValues() {
+        if (next != null) {
+            value += getValue();
+
+        }
+        return value;
     }
 
+    /**
+     * count elements in list
+     *
+     * @return size of next as integer
+     */
+    public int getSize() {
+        if (this.next != null) {
+            return (this.next.getSize()) + 1;
+        }
+        return 1;
+    }
+
+//    public char showValues() {        
+//        if (next != null) {
+//            value += getValue();
+//           
+//        }
+//        return value;
+//    }
 }
-
-

@@ -42,17 +42,28 @@ public class List {
         }
     }
 
+    public int size() {
+        if (!isEmpty()) {
+            int size = elements.getSize();
+            return size;
+        } else {
+            return 0;
+        }
+    }
+
     /**
      * @author ODK
      * @return
      */
-    public Element showValues() {
-        //elements = new Element();
-        value =;
-        elements = elements.toString();
-        return value;
-    }
-
+//    public void showValues() {
+//        //Element element = elements;
+//        //char values = 0;
+//        Element liste = elements.printList();
+//        if (!isEmpty()) {
+//            elements.printList();
+//        }
+//        return this;
+//    }
 }
 
 //    /**

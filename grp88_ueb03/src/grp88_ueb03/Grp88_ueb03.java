@@ -39,6 +39,7 @@ public class Grp88_ueb03 {
         // empty list
         List list = new List();
         System.out.println("erwarte: {}");
+        list.showValues();
         System.out.println("bekomme: " + list.showValues());
         System.out.println(SEPARATOR);
 
@@ -369,7 +370,9 @@ public class Grp88_ueb03 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        //testSize();
+        
+
+        testSize();
         testShowValues();
         //testInsertElementSorted();
         //testIsSorted();
