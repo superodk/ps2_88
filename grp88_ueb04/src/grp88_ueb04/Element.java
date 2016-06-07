@@ -14,22 +14,43 @@ public class Element {
     private char value;
     private Element next;
 
+    /**
+     *
+     * @param value
+     */
     public void setValue(char value) {
         this.value = value;
     }
 
+    /**
+     *
+     * @param next
+     */
     public void setNext(Element next) {
         this.next = next;
     }
 
+    /**
+     *
+     * @return
+     */
     public char getValue() {
         return this.value;
     }
 
+    /**
+     *
+     * @return
+     */
     public Element getNext() {
         return this.next;
     }
 
+    /**
+     *
+     * @param value
+     * @return
+     */
     public Element appendElement(char value) {
         if (this.next == null) {
             Element newElement = new Element();
@@ -41,6 +62,11 @@ public class Element {
         return this;
     }
 
+    /**
+     *
+     * @param value
+     * @return
+     */
     public Element insertElementSorted(char value) {
         if (!isPredecessor(value)) {
             Element newElement = new Element();
@@ -58,6 +84,11 @@ public class Element {
         }
     }
 
+    /**
+     *
+     * @param value
+     * @return
+     */
     public Element deleteElement(char value) {
         if (this.value == value) {
             return this.next;
@@ -70,6 +101,11 @@ public class Element {
 
     }
 
+    /**
+     *
+     * @param value
+     * @return
+     */
     private boolean isPredecessor(char value) {
         char valueLow = Character.toLowerCase(value);
         char value2 = Character.toLowerCase(this.value);
@@ -84,6 +120,11 @@ public class Element {
         return false;
     }
 
+    /**
+     *
+     * @param value
+     * @return
+     */
     public boolean containsValue(char value) {
         if (this.value == value) {
             return true;
@@ -97,6 +138,9 @@ public class Element {
      * Die Methode showValues() soll jetzt einen Parameter vom Typ String
      * erhalten, der die Trennzeichen für die Aneinanderreihung angibt (z.B. " "
      * oder ", ").
+     *
+     * @param separator
+     * @return
      */
     public String showValues(String separator) {
         if (this.next == null) {
@@ -107,17 +151,33 @@ public class Element {
         }
 
     }
-    
-public boolean isSame(Element other) {
-    if (other == null) {
-        return false;
+
+    /**
+     *
+     * @param charList
+     * @return
+     */
+    public int ssize(char[] charList) {
+        if (charList != null) {
+            return charList.length;
+        } else {
+            return charList.length;
+        }
+
     }
-    if ( this.getValue() == other.getValue())
-        return this.next.isSame(other.getNext());
-    if ()
-             
-    
-}
+
+    public boolean isSame(Element other) {
+
+        if (this.getValue() == other.getValue()) {
+            if (this.getNext() != null && other.getNext() != null) {
+                return this.next.isSame(other.getNext());
+            } else if (this.getNext() == null && other.getNext() == null) {
+                return true;
+            }
+        }
+        return false;
+
+    }
 
     //<editor-fold defaultstate="collapsed" desc="tests">
     /**
