@@ -11,40 +11,47 @@ package grp88_ueb04;
  */
 public class Element {
 
+    // elements hidden attributes
     private char value;
     private Element next;
 
+    //<editor-fold defaultstate="collapsed" desc="accessors">
     /**
+     * setter-method: this.value. sets objects private data field
      *
-     * @param value
+     * @param value character value
      */
     public void setValue(char value) {
         this.value = value;
     }
 
     /**
+     * setter-method: this.next. sets objects private reference field
      *
-     * @param next
+     * @param next referred element
      */
     public void setNext(Element next) {
         this.next = next;
     }
 
     /**
+     * getter-method: this.value. retrieves objects private data field
      *
-     * @return
+     * @return character value
      */
     public char getValue() {
         return this.value;
     }
 
     /**
+     * getter-method: this.next. retrieves objects private reference field
      *
-     * @return
+     * @return referred element
      */
     public Element getNext() {
         return this.next;
     }
+//</editor-fold>
 
     /**
      *
@@ -145,23 +152,9 @@ public class Element {
     public String showValues(String separator) {
         if (this.next == null) {
             // aus char wird string durch + ""
-            return getValue() + "";
+            return (getValue() + "");
         } else {
-            return getValue() + separator + next.showValues(separator);
-        }
-
-    }
-
-    /**
-     *
-     * @param charList
-     * @return
-     */
-    public int ssize(char[] charList) {
-        if (charList != null) {
-            return charList.length;
-        } else {
-            return charList.length;
+            return (getValue() + separator + next.showValues(separator));
         }
 
     }
