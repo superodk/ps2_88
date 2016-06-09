@@ -26,20 +26,21 @@ public class Grp88_ueb04 {
      * @param SetB Menge B mit gültigen (char)Values
      * @param args Übergebene Programmparameter (array)args als (string)Values
      */
+    /**
+     * TODO: create charValues array
+     * -> add values from s
+     * -!-> filter values "," & ""
+     * -&> add char[] charValues
+     * ->
+     * -> create Set
+     * -> fill Set
+     * -!> scan charValues for SETS_DELIMITER
+     * -> create new Set
+     * -> fill remaining values in charValues
+     * ->
+     */
     public static void getSetsFromArgs(String[] args) {
 
-        /** TODO: create charValues array
-         * -> add values from s 
-         * -!-> filter values "," & "" 
-         * -&> add char[] charValues 
-         * ->  
-         * -> create Set 
-         * -> fill Set 
-         * -!> scan charValues for SETS_DELIMITER 
-         * -> create new Set 
-         * -> fill remaining values in charValues 
-         * -> 
-        // TODO: create char[] from string[] args
         Set set = new Set();
         String s = Arrays.toString(args);
         char[] charArray = s.toCharArray();
@@ -53,7 +54,6 @@ public class Grp88_ueb04 {
 
     // TODO: code test methods for required console output
     /**
-     * 1sdsd
      * command-line. arguments passed as string elements in array
      *
      * @param args array with strings values
