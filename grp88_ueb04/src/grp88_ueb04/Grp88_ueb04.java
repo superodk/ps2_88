@@ -6,6 +6,8 @@
 package grp88_ueb04;
 // TODO: add license
 
+import java.util.Arrays;
+
 /**
  * TODO: describe class function in javaDoc.
  *
@@ -24,25 +26,44 @@ public class Grp88_ueb04 {
      * @param SetB Menge B mit gültigen (char)Values
      * @param args Übergebene Programmparameter (array)args als (string)Values
      */
-//    public static void getSetsFromArgs (String[] args) {
-//        for (String s: args) {
-//            System.out.println(s);
-//        }
-//    }
+    public static void getSetsFromArgs(String[] args) {
+
+        /** TODO: create charValues array
+         * -> add values from s 
+         * -!-> filter values "," & "" 
+         * -&> add char[] charValues 
+         * ->  
+         * -> create Set 
+         * -> fill Set 
+         * -!> scan charValues for SETS_DELIMITER 
+         * -> create new Set 
+         * -> fill remaining values in charValues 
+         * -> 
+        // TODO: create char[] from string[] args
+        Set set = new Set();
+        String s = Arrays.toString(args);
+        char[] charArray = s.toCharArray();
+
+        for (int i = 0; i < charArray.length; i++) {
+            System.out.print(charArray[i] + "|");
+        }
+        System.out.println("");
+        System.out.println(s);
+    }
 
     // TODO: code test methods for required console output
     /**
-     * command-line arguments passed as string elements in array
+     * 1sdsd
+     * command-line. arguments passed as string elements in array
      *
      * @param args array with strings values
      *
      */
     public static void main(String[] args) {
-        
+
         //TODO: (remove) 
         //Test invoke test methods
-        //getSetsFromArgs(args);
-        
+        getSetsFromArgs(args);
 
         /**
          * String[] args. when the application is launched the command line
