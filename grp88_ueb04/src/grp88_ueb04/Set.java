@@ -27,7 +27,7 @@ public class Set {
      * gleichen Werte enthält wie die aktuelle
      */
     public boolean isSame(Set other) {
-        if (this.isEmpty()) {
+        if (this.isEmpty()) {              //TODO diese leer und andere nicht 
             return false;
         }
         return elements.isSame(other.elements);
@@ -41,10 +41,12 @@ public class Set {
      * @param value
      */
     public void addValue(char value) {
+        //TODO Set.existsValue nutzen
         if (this.isEmpty()) {
             elements = new Element();
             elements.setValue(value);
         } else {
+            //TODO nicht append, sondern insertSorted
             elements = elements.appendElement(value);
         }
 
@@ -72,11 +74,11 @@ public class Set {
      * übergebene Trennzeichen separiert
      */
        public String showValues(String separator) {
-        if (this.elements.getNext() == null) {
+        if (isEmpty()) {
             // aus char wird string durch + ""
-            return (this.elements.getValue() + "");
+            return "{}";
         } else {
-            return this.elements.showValues(separator);
+            return "{" + this.elements.showValues(separator) + "}";
         }
 
     }
@@ -86,6 +88,11 @@ public class Set {
      * TODO: union(Set other) : Set . - liefert eine neue Menge, die die
      * Vereinigung der aktuellen mit der übergebenen abbildet
      */
+       public Set union(Set other) {
+           Set newSet = this.cloneSet();
+           newSet.addElementList(other.elements);
+           return newSet;
+       }
     /**
      * TODO: intersection(Set other) : Set . - liefert eine neue Menge, die
      * die
@@ -100,6 +107,7 @@ public class Set {
      * symmetrische Differenzmenge der aktuellen mit der übergebenen
      * abbildet
      */
+       
     // Die Methoden, die ein Set zurückliefern, verändern weder die ursprüngliche,noch die übergebene Menge.
     // Als private legt mindestens folgende Routinen an:
     /**
@@ -109,9 +117,26 @@ public class Set {
      * Element
      * zu. Die übergebene Liste darf nicht verändert werden
      */
+       private Element addElementList(Element list) {
+           while (list != null) {
+               addValue(list.getValue());
+               list = list.getNext();
+           }
+           return this.elements;
+       }
     /**
      * TODO: cloneSet() : Set . - erstellt eine Kopie der aktuellen Menge
      */
+       private Set cloneSet() {
+           Set newSet = new Set();
+           newSet.elements = newSet.addElementList(this.elements);
+//           Element list = this.elements;
+//           while (list != null) {
+//               newSet.addValue(list.getValue());
+//               list = list.getNext();
+//           }           
+           return newSet;
+       }
     //Keine der public-Methoden benutzt die Klasse Element als Typ für die Rückgabe oder einen Parameter. 
 
 //        //<editor-fold defaultstate="collapsed" desc="tests">
