@@ -14,7 +14,7 @@ public class Set {
     private Element elements; // simple linked list
 
     /**
-     * checks for present elements
+     * TODO: check method checks for present elements
      *
      * @return logical value
      */
@@ -23,8 +23,11 @@ public class Set {
     }
 
     /**
-     * TODO: isSame(Set other) : boolean . - prüft, ob die übergebene Menge die
-     * gleichen Werte enthält wie die aktuelle
+     * TODO: check method isSame(Set other) : boolean . - prüft, ob die
+     * übergebene Menge die gleichen Werte enthält wie die aktuelle
+     *
+     * @param other
+     * @return
      */
     public boolean isSame(Set other) {
         if (this.isEmpty()) {              //TODO diese leer und andere nicht 
@@ -34,68 +37,78 @@ public class Set {
     }
 
     /**
-     * TODO: addValue(char value) . - fügt ein neues Element mit übergebenem
-     * Wert zu, wenn der Wert noch nicht existiert. Ein Wert kann also nur ein
-     * Mal in der Menge vorkommen
+     * TODO: check method
+     * addValue(char value) . - fügt ein neues Element mit übergebenem Wert zu,
+     * wenn der Wert noch nicht existiert. Ein Wert kann also nur ein Mal in der
+     * Menge vorkommen
      *
      * @param value
      */
     public void addValue(char value) {
         //TODO Set.existsValue nutzen
-        if (this.isEmpty()) {
-            elements = new Element();
-            elements.setValue(value);
-        } else {
-            //TODO nicht append, sondern insertSorted
-            elements = elements.appendElement(value);
+        if (!existsValue(value)) {
+            elements = elements.insertElementSorted(value);
         }
+    }
+//            elements = new Element();
+//            elements.setValue(value);
+//        } else {
+//            elements = elements.insertElementSorted(value);
+//        }
+//
+//    }
 
+    /**
+     * TODO: check method checks if the parameter already exists in element list
+     *
+     * @param value to check
+     * @return logical value
+     */
+    public boolean existsValue(char value) {
+        if (!isEmpty()) {
+        return elements.containsValue(value); 
+        }
+        return false;
     }
 
     /**
-     * TODO: existsValue(char value ) : boolean . - prüft , ob der Wert
-     * schon in
-     * der Elementliste existiert
+     * delete element with this value, otherwise nothing
+     *
+     * @param value to delete
      */
-    /**
-     * TODO: deleteValue(char value ) . - löscht ein Element diesen Wertes ;
-     * falls es nicht vorhanden ist , passiert nichts
-     */
-       public void deleteValue(char value) {
+    public void deleteValue(char value) {
         if (!isEmpty()) {
             elements = elements.deleteElement(value);
         }
     }
+
     /**
-     * TODO: showValues(String SEPARATOR) : String . - liefert eine
-     * Stringdarstellung des Mengeninhalts mit umschließenden geschweiften
-     * Klammern.Die einzelnen Elemente der Menge werden durch das als
-     * Parameter
-     * übergebene Trennzeichen separiert
+     * showValues(String SEPARATOR) : String . - liefert eine Stringdarstellung
+     * des Mengeninhalts mit umschließenden geschweiften Klammern.Die einzelnen
+     * Elemente der Menge werden durch das als Parameter übergebene Trennzeichen
+     * separiert
      */
-       public String showValues(String separator) {
+    public String showValues(String separator) {
         if (isEmpty()) {
             // aus char wird string durch + ""
             return "{}";
         } else {
             return "{" + this.elements.showValues(separator) + "}";
         }
-
     }
-    
-    
+
     /**
-     * TODO: union(Set other) : Set . - liefert eine neue Menge, die die
-     * Vereinigung der aktuellen mit der übergebenen abbildet
+     * union(Set other) : Set . - liefert eine neue Menge, die die Vereinigung
+     * der aktuellen mit der übergebenen abbildet
      */
-       public Set union(Set other) {
-           Set newSet = this.cloneSet();
-           newSet.addElementList(other.elements);
-           return newSet;
-       }
+    public Set union(Set other) {
+        Set newSet = this.cloneSet();
+        newSet.addElementList(other.elements);
+        return newSet;
+    }
+
     /**
-     * TODO: intersection(Set other) : Set . - liefert eine neue Menge, die
-     * die
+     * TODO: intersection(Set other) : Set . - liefert eine neue Menge, die die
      * Schnittmenge der aktuellen mit der übergebenen abbildet
      */
     /**
@@ -104,40 +117,31 @@ public class Set {
      */
     /**
      * TODO: symmDiff(Set other) : Set . - liefert eine neue Menge, die die
-     * symmetrische Differenzmenge der aktuellen mit der übergebenen
-     * abbildet
+     * symmetrische Differenzmenge der aktuellen mit der übergebenen abbildet
      */
-       
     // Die Methoden, die ein Set zurückliefern, verändern weder die ursprüngliche,noch die übergebene Menge.
     // Als private legt mindestens folgende Routinen an:
     /**
-     * TODO: addElementList(Element list) . - fügt der aktuellen Liste alle
-     * noch
-     * nicht in ihr enthaltenen Werte einer übergebenen Liste vom Typ
-     * Element
-     * zu. Die übergebene Liste darf nicht verändert werden
+     * addElementList(Element list) . - fügt der aktuellen Liste alle noch nicht
+     * in ihr enthaltenen Werte einer übergebenen Liste vom Typ Element zu. Die
+     * übergebene Liste darf nicht verändert werden
      */
-       private Element addElementList(Element list) {
-           while (list != null) {
-               addValue(list.getValue());
-               list = list.getNext();
-           }
-           return this.elements;
-       }
+    private Element addElementList(Element list) {
+        while (list != null) {
+            addValue(list.getValue());
+            list = list.getNext();
+        }
+        return this.elements;
+    }
+
     /**
-     * TODO: cloneSet() : Set . - erstellt eine Kopie der aktuellen Menge
+     * cloneSet() : Set . - erstellt eine Kopie der aktuellen Menge
      */
-       private Set cloneSet() {
-           Set newSet = new Set();
-           newSet.elements = newSet.addElementList(this.elements);
-//           Element list = this.elements;
-//           while (list != null) {
-//               newSet.addValue(list.getValue());
-//               list = list.getNext();
-//           }           
-           return newSet;
-       }
-    //Keine der public-Methoden benutzt die Klasse Element als Typ für die Rückgabe oder einen Parameter. 
+    private Set cloneSet() {
+        Set newSet = new Set();
+        newSet.elements = newSet.addElementList(this.elements);
+        return newSet;
+    } 
 
 //        //<editor-fold defaultstate="collapsed" desc="tests">
 //    /**
@@ -339,5 +343,4 @@ public class Set {
 //        testIsSame();
 //    }
 ////</editor-fold>    
-
 }

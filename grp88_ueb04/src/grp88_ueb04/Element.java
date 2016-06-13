@@ -11,53 +11,25 @@ package grp88_ueb04;
  */
 public class Element {
 
-    // elements hidden attributes
     private char value;
     private Element next;
 
-    //<editor-fold defaultstate="collapsed" desc="accessors">
-    /**
-     * setter-method: this.value. sets objects private data field
-     *
-     * @param value character value
-     */
     public void setValue(char value) {
         this.value = value;
     }
 
-    /**
-     * setter-method: this.next. sets objects private reference field
-     *
-     * @param next referred element
-     */
     public void setNext(Element next) {
         this.next = next;
     }
 
-    /**
-     * getter-method: this.value. retrieves objects private data field
-     *
-     * @return character value
-     */
     public char getValue() {
         return this.value;
     }
 
-    /**
-     * getter-method: this.next. retrieves objects private reference field
-     *
-     * @return referred element
-     */
     public Element getNext() {
         return this.next;
     }
-//</editor-fold>
 
-    /**
-     *
-     * @param value
-     * @return
-     */
     public Element appendElement(char value) {
         if (this.next == null) {
             Element newElement = new Element();
@@ -69,11 +41,6 @@ public class Element {
         return this;
     }
 
-    /**
-     *
-     * @param value
-     * @return
-     */
     public Element insertElementSorted(char value) {
         if (!isPredecessor(value)) {
             Element newElement = new Element();
@@ -91,11 +58,6 @@ public class Element {
         }
     }
 
-    /**
-     *
-     * @param value
-     * @return
-     */
     public Element deleteElement(char value) {
         if (this.value == value) {
             return this.next;
@@ -105,14 +67,8 @@ public class Element {
             }
             return this;
         }
-
     }
 
-    /**
-     *
-     * @param value
-     * @return
-     */
     private boolean isPredecessor(char value) {
         char valueLow = Character.toLowerCase(value);
         char value2 = Character.toLowerCase(this.value);
@@ -123,15 +79,9 @@ public class Element {
         if (value2 == valueLow) {
             return this.value < value;
         }
-
         return false;
     }
 
-    /**
-     *
-     * @param value
-     * @return
-     */
     public boolean containsValue(char value) {
         if (this.value == value) {
             return true;
@@ -145,34 +95,31 @@ public class Element {
      * Die Methode showValues() soll jetzt einen Parameter vom Typ String
      * erhalten, der die Trennzeichen für die Aneinanderreihung angibt (z.B. " "
      * oder ", ").
-     *
-     * @param separator
-     * @return
      */
     public String showValues(String separator) {
         if (this.next == null) {
             // aus char wird string durch + ""
-            return (getValue() + "");
+            return getValue() + "";
         } else {
-            return (getValue() + separator + next.showValues(separator));
+            return getValue() + separator + next.showValues(separator);
         }
 
     }
 
     public boolean isSame(Element other) {
-        //TODO other kann null sein
+        if (other == null) {
+            return false;
+        }
+        if (this.getNext() == null) {
+            return getValue() == other.getValue();
+        }
         if (this.getValue() == other.getValue()) {
-            if (this.getNext() != null && other.getNext() != null) {
-                return this.next.isSame(other.getNext());
-            } else if (this.getNext() == null && other.getNext() == null) {
-                return true;
-            }
+            return this.next.isSame(other.getNext());
         }
         return false;
-
     }
 
-    //<editor-fold defaultstate="collapsed" desc="tests">
+//<editor-fold defaultstate="collapsed" desc="tests">
     /**
      * create a list of the given chars in the array in the order of the
      * arraychars.

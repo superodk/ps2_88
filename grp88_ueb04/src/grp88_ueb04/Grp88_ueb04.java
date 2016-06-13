@@ -11,20 +11,14 @@ import java.util.Arrays;
 /**
  * TODO: describe class function in javaDoc.
  *
- * @author ODK
+ * @author iaw100728
  */
 public class Grp88_ueb04 {
 
-    final char SETS_DELIMITER = '/'; // Trennzeichen bei Mengen
+    final static char SETS_DELIMITER = '/'; // Trennzeichen bei Mengen
 
     /**
-     * TODO: Methode füllt Set A und Set B mit (char) Objekten/Werten aus
-     * String[] args. das Ende der Menge wird durch einen Delimiter (/)
-     * gekennzeichnet
-     *
-     * @param SetA Menge A mit gültigen (char)Values
-     * @param SetB Menge B mit gültigen (char)Values
-     * @param args Übergebene Programmparameter (array)args als (string)Values
+     * @param args the command line arguments
      */
     /**
      * TODO: create charValues array
@@ -40,17 +34,32 @@ public class Grp88_ueb04 {
      * ->
      */
     public static void getSetsFromArgs(String[] args) {
-
-        Set set = new Set();
-        String s = Arrays.toString(args);
-        char[] charArray = s.toCharArray();
-
-        for (int i = 0; i < charArray.length; i++) {
-            System.out.print(charArray[i] + "|");
+        Set setA = new Set();
+        Set setB = new Set();
+        boolean nextSet = false;
+        for (int i = 0; i < args.length; i++) {
+            if (args[i].charAt(0) == SETS_DELIMITER) {
+                nextSet = true;
+                i++; // skip delimiter
+            }
+            if (nextSet == false) {
+            setA.addValue(args[i].charAt(0));
+        } else if (nextSet == true) {
+            setB.addValue(args[i].charAt(0));
         }
-        System.out.println("");
-        System.out.println(s);
+        }
+        System.out.println(setA.toString());
+        System.out.println(setB.toString());
     }
+     
+
+//        for (int i = 0; i < charArray.length; i++) {
+//            System.out.print(charArray[i] + "|");
+//        }
+//        System.out.println("");
+//        System.out.println(s);
+//           char[] charArray = s.toCharArray();
+    
 
     // TODO: code test methods for required console output
     /**
@@ -60,10 +69,10 @@ public class Grp88_ueb04 {
      *
      */
     public static void main(String[] args) {
-
-        //TODO: (remove) 
-        //Test invoke test methods
+        // TODO code application logic here
         getSetsFromArgs(args);
+        
+
 
         /**
          * String[] args. when the application is launched the command line
@@ -80,5 +89,5 @@ public class Grp88_ueb04 {
         //die Differenzmenge B - A und
         //die symmetrische Differenz.
     }
-
+    
 }
