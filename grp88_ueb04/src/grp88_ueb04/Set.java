@@ -6,15 +6,20 @@
 package grp88_ueb04;
 
 /**
+ * Class Set. unfinished/unchecked
+ * set interface implementation
  *
  * @author iaw100728
  */
 public class Set {
 
+    /**
+     * private class variable. Set elements implemented as linked list
+     */
     private Element elements; // simple linked list
 
     /**
-     * TODO: check method checks for present elements
+     * anticipate possible NullPointerException.
      *
      * @return logical value
      */
@@ -23,73 +28,67 @@ public class Set {
     }
 
     /**
-     * TODO: check method isSame(Set other) : boolean . - prüft, ob die
-     * übergebene Menge die gleichen Werte enthält wie die aktuelle
+     * checks if committed heap contain the same values as the actual heap
+     * crowd.
      *
-     * @param other
-     * @return
+     * @param other heap to compare
+     * @return logical value
      */
     public boolean isSame(Set other) {
-        if (this.isEmpty()) {              //TODO diese leer und andere nicht 
+        if (this.isEmpty() || other.isEmpty()) {
             return false;
         }
-        return elements.isSame(other.elements);
+        return this.elements.isSame(other.elements);
     }
 
     /**
-     * TODO: check method
-     * addValue(char value) . - fügt ein neues Element mit übergebenem Wert zu,
-     * wenn der Wert noch nicht existiert. Ein Wert kann also nur ein Mal in der
-     * Menge vorkommen
+     * adds a new element with committed value, when this value is unique.
      *
-     * @param value
+     * @param value character value
      */
     public void addValue(char value) {
         //TODO Set.existsValue nutzen
-        if (!existsValue(value)) {
-            elements = elements.insertElementSorted(value);
+        if (this.isEmpty()) {
+            this.elements = new Element();
+            this.elements.setValue(value);
+        }
+        if (!this.existsValue(value)) {
+            this.elements = this.elements.insertElementSorted(value);
         }
     }
-//            elements = new Element();
-//            elements.setValue(value);
-//        } else {
-//            elements = elements.insertElementSorted(value);
-//        }
-//
-//    }
 
     /**
-     * TODO: check method checks if the parameter already exists in element list
+     * checks if committed parameter exists in list.
      *
-     * @param value to check
+     * @param value character value
      * @return logical value
      */
     public boolean existsValue(char value) {
-        if (!isEmpty()) {
-        return elements.containsValue(value); 
+        if (this.isEmpty()) {
+            return false;
         }
-        return false;
+        return this.elements.containsValue(value);
     }
 
     /**
-     * delete element with this value, otherwise nothing
+     * delete element containing committed character, otherwise nothing.
      *
-     * @param value to delete
+     * @param value character to delete
      */
     public void deleteValue(char value) {
-        if (!isEmpty()) {
-            elements = elements.deleteElement(value);
+        if (!this.isEmpty()) {
+            this.elements = this.elements.deleteElement(value);
         }
     }
 
     /**
-     * showValues(String SEPARATOR) : String . - liefert eine Stringdarstellung
-     * des Mengeninhalts mit umschließenden geschweiften Klammern.Die einzelnen
-     * Elemente der Menge werden durch das als Parameter übergebene Trennzeichen
-     * separiert
+     * prints crowds values separated by committed separator as a string.
+     *
+     * @param separator string
+     * @return crowds characters as string
      */
     public String showValues(String separator) {
-        if (isEmpty()) {
+        if (this.isEmpty()) {
             // aus char wird string durch + ""
             return "{}";
         } else {
@@ -98,52 +97,95 @@ public class Set {
     }
 
     /**
-     * union(Set other) : Set . - liefert eine neue Menge, die die Vereinigung
-     * der aktuellen mit der übergebenen abbildet
-     */
-    public Set union(Set other) {
-        Set newSet = this.cloneSet();
-        newSet.addElementList(other.elements);
-        return newSet;
-    }
-
-    /**
-     * TODO: intersection(Set other) : Set . - liefert eine neue Menge, die die
-     * Schnittmenge der aktuellen mit der übergebenen abbildet
-     */
-    /**
-     * TODO: diff(Set other) : Set . - liefert eine neue Menge, die die
-     * Differenzmenge der aktuellen mit der übergebenen abbildet
-     */
-    /**
-     * TODO: symmDiff(Set other) : Set . - liefert eine neue Menge, die die
-     * symmetrische Differenzmenge der aktuellen mit der übergebenen abbildet
-     */
-    // Die Methoden, die ein Set zurückliefern, verändern weder die ursprüngliche,noch die übergebene Menge.
-    // Als private legt mindestens folgende Routinen an:
-    /**
-     * addElementList(Element list) . - fügt der aktuellen Liste alle noch nicht
-     * in ihr enthaltenen Werte einer übergebenen Liste vom Typ Element zu. Die
-     * übergebene Liste darf nicht verändert werden
+     * adds all not already present values of the committed list from type
+     * element to current list. the committed list must not be change
+     *
+     * @param list linked list
+     * @return list out of elements
      */
     private Element addElementList(Element list) {
         while (list != null) {
-            addValue(list.getValue());
+            this.addValue(list.getValue());
             list = list.getNext();
         }
         return this.elements;
     }
 
     /**
-     * cloneSet() : Set . - erstellt eine Kopie der aktuellen Menge
+     * creates a clone of the current set.
+     *
+     * @return cloned set
      */
     private Set cloneSet() {
         Set newSet = new Set();
         newSet.elements = newSet.addElementList(this.elements);
         return newSet;
-    } 
+    }
 
-//        //<editor-fold defaultstate="collapsed" desc="tests">
+    //<editor-fold defaultstate="collapsed" desc="operation methods">
+    /**
+     * provides a new set, that is a union of the actual and the committed set.
+     *
+     * @param other set for operation
+     * @return new set
+     */
+    public Set union(Set other) {
+        Set newSet = this.cloneSet();
+        newSet.elements = newSet.addElementList(other.elements);
+        return newSet;
+    }
+
+    /**
+     * returns a new set as a intersection of the current list with the
+     * committed list.
+     *
+     * @param other another set
+     * @return new set
+     */
+    public Set intersection(Set other) {
+        Set newSet = new Set();
+        while (this.elements != null) {
+            if (other.existsValue(this.elements.getValue())) {
+                newSet.addValue(this.elements.getValue());
+            }
+            this.elements = this.elements.getNext();
+        }
+        return newSet;
+    }
+
+    /**
+     * TODO: liefert eine neue Menge, die die Differenzmenge der aktuellen mit
+     * der übergebenen abbildet.
+     *
+     * @param other another ser
+     * @return new set
+     */
+    public Set diff(Set other) {
+        Set unionSet = this.union(other);
+        Set intersectionSet = this.intersection(other);
+        Set newSet = new Set();
+        while (unionSet.elements != null) {
+                newSet.addValue(unionSet.elements.getValue());
+            }
+            unionSet.elements = unionSet.elements.getNext();            
+        
+        System.out.println(newSet.showValues(", "));
+        return newSet;
+    }
+
+//    /**
+//     * TODO: liefert eine neue Menge, die die symmetrische Differenzmenge der
+//     * aktuellen mit der übergebenen abbildet.
+//     *
+//     * @param other another set
+//     * @return new set
+//     */
+//    public Set symmDiff(Set other) {
+//
+//        return
+//    }
+//</editor-fold>
+//        //<editor-fold defaultstate="collapsed" desc="settests">
 //    /**
 //     * create a list of the given chars in the array in the order of the
 //     * arraychars.

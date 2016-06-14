@@ -6,30 +6,68 @@
 package grp88_ueb04;
 
 /**
+ * Class Element. finished/checked
  *
  * @author iaw100728
+ *
  */
 public class Element {
 
+    /**
+     * member/primitive variable.
+     * contains character value
+     */
     private char value;
+    /**
+     * member/reference variable.
+     * refers to next element
+     */
     private Element next;
 
+    //<editor-fold defaultstate="collapsed" desc="accessor methods">
+    /**
+     * setter method - (write access). sets new character to this element
+     *
+     * @param value character
+     */
     public void setValue(char value) {
         this.value = value;
     }
 
+    /**
+     * setter method - (write access). sets reference to next element
+     *
+     * @param next reference next
+     */
     public void setNext(Element next) {
         this.next = next;
     }
 
+    /**
+     * getter method - (read access). gets this elements character value
+     *
+     * @return character value
+     */
     public char getValue() {
         return this.value;
     }
 
+    /**
+     * getter method - (read access). gets the reference to next element
+     *
+     * @return reference next
+     */
     public Element getNext() {
         return this.next;
     }
+    //</editor-fold> 
 
+    /**
+     * appends an element with character value to the end of the linked list.
+     *
+     * @param value character value
+     * @return new appended element
+     */
     public Element appendElement(char value) {
         if (this.next == null) {
             Element newElement = new Element();
@@ -41,8 +79,15 @@ public class Element {
         return this;
     }
 
+    /**
+     * inserts an element with character value sorted by "isPredecessor" -method
+     * to the end of the linked list.
+     *
+     * @param value character value
+     * @return created element
+     */
     public Element insertElementSorted(char value) {
-        if (!isPredecessor(value)) {
+        if (!this.isPredecessor(value)) {
             Element newElement = new Element();
             newElement.setValue(value);
             newElement.setNext(this);
@@ -58,6 +103,12 @@ public class Element {
         }
     }
 
+    /**
+     * deletes element with the committed parameter
+     *
+     * @param value character value
+     * @return found element
+     */
     public Element deleteElement(char value) {
         if (this.value == value) {
             return this.next;
@@ -69,6 +120,12 @@ public class Element {
         }
     }
 
+    /**
+     * defines a sort order for the character values.
+     *
+     * @param value character value
+     * @return logical value
+     */
     private boolean isPredecessor(char value) {
         char valueLow = Character.toLowerCase(value);
         char value2 = Character.toLowerCase(this.value);
@@ -82,50 +139,76 @@ public class Element {
         return false;
     }
 
+    /**
+     * search element with committed parameter
+     *
+     * @param value character value
+     * @return logical value
+     */
     public boolean containsValue(char value) {
         if (this.value == value) {
             return true;
-        } else if ((this.next != null) && (isPredecessor(value))) {
-            return next.containsValue(value);
+        } else if ((this.next != null) && (this.isPredecessor(value))) {
+            return this.next.containsValue(value);
         }
         return false;
     }
 
     /**
-     * Die Methode showValues() soll jetzt einen Parameter vom Typ String
-     * erhalten, der die Trennzeichen für die Aneinanderreihung angibt (z.B. " "
-     * oder ", ").
+     * help-method of showValues(). counts elements of invoking list
+     *
+     * @return list size
+     */
+    public int getSize() {
+        if (this.next != null) {
+            return (this.next.getSize()) + 1;
+        }
+        return 1;
+    }
+
+    /**
+     * print all element values if this linked list
+     *
+     * @param separator separate printed values
+     * @return all element character values as string
      */
     public String showValues(String separator) {
         if (this.next == null) {
             // aus char wird string durch + ""
-            return getValue() + "";
+            return this.getValue() + "";
         } else {
-            return getValue() + separator + next.showValues(separator);
+            return this.getValue() + separator + next.showValues(separator);
         }
 
     }
 
+    /**
+     * compare committed list elements with this list elements
+     *
+     * @param other list to check
+     * @return logical value
+     */
     public boolean isSame(Element other) {
-        if (other == null) {
+        // base case: no element or wrong size
+        if (other == null || (other.getSize() != this.getSize())) {
             return false;
         }
-        if (this.getNext() == null) {
-            return getValue() == other.getValue();
+        if (this.getNext() == null) { // base case: last element
+            return getValue() == other.getValue(); // compare last elements values
         }
-        if (this.getValue() == other.getValue()) {
-            return this.next.isSame(other.getNext());
+        if (this.getValue() == other.getValue()) { // compare current elements values
+            return this.next.isSame(other.getNext()); // recursive call next elements values
         }
         return false;
     }
 
-//<editor-fold defaultstate="collapsed" desc="tests">
+//<editor-fold defaultstate="collapsed" desc="class tests">
     /**
      * create a list of the given chars in the array in the order of the
-     * arraychars.
+     * array chars.
      *
      * @param charList array of the chars to add
-     * @return a list holding the chars in the order of the arraychars
+     * @return a list holding the chars in the order of the array chars
      */
     private static Element createTestList(char[] charList) {
         Element list = null;
@@ -426,8 +509,10 @@ public class Element {
         // same length, different values
         System.out.print(!list3.isSame(list4)
                 ? ""
-                : "isSame() gleiche Listenlänge anderer Inhalt: {" + list2.showValues(" ")
-                + "}.isSame({" + list3.showValues(" ") + "}) sollte false liefern.\n");
+                : "isSame() gleiche Listenlänge anderer Inhalt: {"
+                + list3.showValues(" ")
+                + "}.isSame({" + list4.showValues(" ")
+                + "}) sollte false liefern.\n");
 
         // compare longer with shorter list
         System.out.print(!list2.isSame(list1)
@@ -455,6 +540,5 @@ public class Element {
         testDeleteElement();
         testIsSame();
     }
-//</editor-fold>    
-
+//</editor-fold>
 }
